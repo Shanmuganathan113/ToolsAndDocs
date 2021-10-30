@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "72c51b70-0b74-4f3c-b3cd-61ab3ba8500a",
+		"name": "UtilCollection",
+		"description": "This have all the details about utils\r\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UtilRefreshStatic",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"utilKey\": \"createTask\",\r\n    \"utilUserId\":\"USR00001586\",\r\n    \"utilTeamId\":\"TEM000158\",\r\n    \"utilFileName\":\"xlFileName\",\r\n    \"latestStaticUpdatedTime\":\"25-04-2021 13:25:42\",\r\n    \"utilValue\": [\r\n        {\r\n            \"taskId\": \"TaskId\",\r\n            \"assignedTo\": \"USR00001586\",\r\n            \"latestStatus\": \"102II\",\r\n            \"comment\": \"Comment\",\r\n            \"slNo\": \"sl No\",\r\n            \"taskTitle\": \"Test Task\",\r\n            \"taskDetails\": \"Hellow this task is to test\",\r\n            \"effortHrs\": \"1\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/util/utilRefreshStatics?userId=USR00001586",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"util",
+						"utilRefreshStatics"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "USR00001586"
+						}
+					]
+				},
+				"description": "This request get all static details"
+			},
+			"response": []
+		},
+		{
+			"name": "UtilManageTasks-createTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"utilKey\": \"createTask\",\r\n\t\"utilUserId\": \"USR00001586\",\r\n\t\"utilFileName\": \"Tasks.xlsm\",\r\n\t\"utilValue\": [{\r\n\t\t\"taskId\": \"\",\r\n\t\t\"slNo\": 6,\r\n\t\t\"createdByTeam\": \"TEM000158\",\r\n\t\t\"assignedTo\": \"USR00002024\",\r\n\t\t\"latestStatus\": \"102\",\r\n\t\t\"comment\": \"Please complete this task asap\",\r\n\t\t\"taskTitle\": \"Write an article about consumers and suppliers\",\r\n\t\t\"taskDetails\": \"Please write an article about consumers and place it in the below xl cell\",\r\n\t\t\"effortHrs\": 5\r\n\t}, {\r\n\t\t\"taskId\": \"\",\r\n\t\t\"slNo\": 7,\r\n\t\t\"createdByTeam\": \"TEM000158\",\r\n\t\t\"assignedTo\": \"USR00002024\",\r\n\t\t\"latestStatus\": \"102\",\r\n\t\t\"comment\": \"Please complete asap\",\r\n\t\t\"taskTitle\": \"Write an article about predicates and functions\",\r\n\t\t\"taskDetails\": \"Please write an article about functions and predicates place it in the below xl cell\",\r\n\t\t\"effortHrs\": 2\r\n\t}, {\r\n\t\t\"taskId\": \"\",\r\n\t\t\"slNo\": 8,\r\n\t\t\"createdByTeam\": \"TEM000158\",\r\n\t\t\"assignedTo\": \"TEM000191\",\r\n\t\t\"latestStatus\": \"151\",\r\n\t\t\"comment\": \"please create a required svg file\",\r\n\t\t\"taskTitle\": \"SVG required for physics 12 the\",\r\n\t\t\"taskDetails\": \"please complete and place the svg file in the below location\",\r\n\t\t\"effortHrs\": 1\r\n\t}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/util/utilManageTask",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"util",
+						"utilManageTask"
+					]
+				},
+				"description": "This request get all static details"
+			},
+			"response": []
+		},
+		{
+			"name": "UtilManageTasks-UpdateTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"utilKey\": \"createTask\",\r\n    \"utilUserId\":\"USR00001586\",\r\n    \"utilFileName\":\"xlFileName\",\r\n    \"latestStaticUpdatedTime\":\"25-04-2021 13:25:42\",\r\n   \r\n      \"filterTaskDTO\": \r\n        {\r\n\t\t\t\"taskId\": null,\r\n\t\t\t\"taskTitle\": null,\r\n\t\t\t\"taskDesc\": null,\r\n\t\t\t\"createdByTeamId\": null,\r\n\t\t\t\"createdByUserId\": null,\r\n\t\t\t\"assignedToTeamId\": null,\r\n\t\t\t\"taskStatus\": null,\r\n\t\t\t\"createdBefore\": null,\r\n\t\t\t\"createdAfter\": null,\r\n\t\t\t\"maxRecords\": 50\r\n\t\t}\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/util/utilManageTask",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"util",
+						"utilManageTask"
+					]
+				},
+				"description": "This request get all static details"
+			},
+			"response": []
+		},
+		{
+			"name": "UtilFilterTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"utilKey\": \"FilterTask\",\r\n\t\"utilUserId\": \"USR00001586\",\r\n\t\"utilFileName\": \"Tasks.xlsm\",\r\n\t\"filterTaskDTO\": {\r\n\t\t\"listTaskId\": \"TSK00001101,TSK00001102\",\r\n\t\t\"taskTitle\": \"test\",\r\n\t\t\"taskDesc\": \"dd\",\r\n\t\t\"createdByTeamId\": \"TEM000191\",\r\n\t\t\"assignedToTeamId\": \"TEM000191\",\r\n\t\t\"taskStatus\": \"157\",\r\n\t\t\"latestTaskStatus\": \"107\",\r\n\t\t\"createdBefore\": \"12/15/2021\",\r\n\t\t\"createdAfter\": \"12/15/2021\",\r\n\t\t\"maxRecords\": \"100\"\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/util/utilFilterTask",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"util",
+						"utilFilterTask"
+					]
+				},
+				"description": "This request get all static details"
+			},
+			"response": []
+		},
+		{
+			"name": "UtilCreateTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"utilKey\": \"createTask\",\r\n    \"utilUserId\":\"USR00001586\",\r\n    \"utilTeamId\":\"TEM000001\",\r\n    \"utilFileName\":\"xlFileName\",\r\n    \"utilValue\": [\r\n        {\r\n            \"taskId\": \"TaskId\",\r\n            \"assignedTo\": \"USR00001586\",\r\n            \"latestStatus\": \"102II\",\r\n            \"comment\": \"Comment\",\r\n            \"slNo\": \"sl No\",\r\n            \"taskTitle\": \"Test Task\",\r\n            \"taskDetails\": \"Hellow this task is to test\",\r\n            \"effortHrs\": \"1\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/util/utilRefreshStatics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"util",
+						"utilRefreshStatics"
+					]
+				},
+				"description": "This request get all static details"
+			},
+			"response": []
+		}
+	]
+}

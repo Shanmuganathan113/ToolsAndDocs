@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "ec9b21b6-5e27-4ba3-8dc0-fdc5781774e1",
+		"name": "TeamCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetUserTeams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/team?userId=60&flag=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"team"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "60"
+						},
+						{
+							"key": "flag",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Below url calls this url internally\r\nhttp://localhost:8080/team?view=myTeams&userId=5"
+			},
+			"response": []
+		},
+		{
+			"name": "GetTeamDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/team?teamId=45&flag=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"team"
+					],
+					"query": [
+						{
+							"key": "teamId",
+							"value": "45"
+						},
+						{
+							"key": "flag",
+							"value": "2"
+						}
+					]
+				},
+				"description": "Below url call this url internally.\r\n\r\nhttp://localhost:8080/team?view=detailedInfo&teamId=5"
+			},
+			"response": []
+		}
+	]
+}

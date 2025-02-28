@@ -1,79 +1,70 @@
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+To update the automated run value with a new timestamp (1 hour added), modify the automatedRun() method to update the file instead of setting it to null.
 
-import java.io.*;
-import java.nio.file.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
 
-@Service
-public class ReportService {
+---
 
-    private static final String FILE_PATH = "C:/data/report_schedule.txt";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");
+Updated automatedRun() Method
 
-    @Scheduled(fixedRate = 3600000) // Every 1 hour
-    public void manualRun() {
-        Map<String, String> data = readFile();
-        if (data.containsKey("Manual run") && !data.get("Manual run").isEmpty()) {
-            String[] timestamps = data.get("Manual run").split(",");
-            for (String timestamp : timestamps) {
-                generateReport(timestamp.trim());
-            }
-            updateFile("Manual run", ""); // Reset manual run
-        }
-    }
-
-    @Scheduled(fixedRate = 900000) // Every 15 minutes
-    public void automatedRun() {
-        Map<String, String> data = readFile();
-        if (data.containsKey("Automated run") && !data.get("Automated run").isEmpty()) {
-            generateReport(data.get("Automated run").trim());
-            updateFile("Automated run", null); // Reset automated run
-        }
-    }
-
-    private void generateReport(String timestamp) {
-        try {
-            LocalDateTime dateTime = LocalDateTime.parse(timestamp, FORMATTER);
-            LocalDateTime updatedTime = dateTime.plusHours(1);
-            System.out.println("Generated report for: " + updatedTime.format(FORMATTER));
-        } catch (Exception e) {
-            System.err.println("Error parsing date: " + timestamp);
-        }
-    }
-
-    private Map<String, String> readFile() {
-        Map<String, String> data = new HashMap<>();
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
-            for (String line : lines) {
-                String[] parts = line.split(":", 2);
-                if (parts.length == 2) {
-                    data.put(parts[0].trim(), parts[1].trim());
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-        }
-        return data;
-    }
-
-    private void updateFile(String key, String newValue) {
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
-            List<String> updatedLines = new ArrayList<>();
-            for (String line : lines) {
-                if (line.startsWith(key)) {
-                    updatedLines.add(key + " : " + (newValue == null ? "" : newValue));
-                } else {
-                    updatedLines.add(line);
-                }
-            }
-            Files.write(Paths.get(FILE_PATH), updatedLines);
-        } catch (IOException e) {
-            System.err.println("Error updating file: " + e.getMessage());
-        }
+@Scheduled(fixedRate = 900000) // Every 15 minutes
+public void automatedRun() {
+    Map<String, String> data = readFile();
+    if (data.containsKey("Automated run") && !data.get("Automated run").isEmpty()) {
+        String oldTimestamp = data.get("Automated run").trim();
+        String newTimestamp = generateReport(oldTimestamp); // Get new date with 1 hour added
+        updateFile("Automated run", newTimestamp); // Update file with new value
     }
 }
+
+
+---
+
+Updated generateReport() Method
+
+Now it returns the new timestamp instead of just printing it:
+
+private String generateReport(String timestamp) {
+    try {
+        LocalDateTime dateTime = LocalDateTime.parse(timestamp, FORMATTER);
+        LocalDateTime updatedTime = dateTime.plusHours(1);
+        String newTimestamp = updatedTime.format(FORMATTER);
+        System.out.println("Generated report for: " + newTimestamp);
+        return newTimestamp;
+    } catch (Exception e) {
+        System.err.println("Error parsing date: " + timestamp);
+        return timestamp; // Return old timestamp if error occurs
+    }
+}
+
+
+---
+
+What Changes?
+
+Instead of setting Automated run to null, we update it with a new timestamp (1 hour later).
+
+generateReport() now returns the updated timestamp.
+
+The new timestamp is saved back to the file.
+
+
+
+---
+
+Example Before Update
+
+Automated run : 28-Feb-2025 14:00:000
+
+After First Run
+
+Generated report for: 28-Feb-2025 15:00:000
+
+Automated run : 28-Feb-2025 15:00:000
+
+After Next Run (15 mins later)
+
+Generated report for: 28-Feb-2025 16:00:000
+
+Automated run : 28-Feb-2025 16:00:000
+
+Now, the automated timestamp keeps increasing with each execution. Let me know if you need any more changes!
+
